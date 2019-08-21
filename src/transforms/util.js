@@ -1,9 +1,17 @@
 import { tokens } from '../tokenTypes'
 
-const { LENGTH, UNSUPPORTED_LENGTH_UNIT, PERCENT, COLOR, SPACE, NONE } = tokens
+const {
+  LENGTH,
+  UNSUPPORTED_LENGTH_UNIT,
+  PERCENT,
+  COLOR,
+  SPACE,
+  NONE,
+  RPX,
+} = tokens
 
 export const directionFactory = ({
-  types = [LENGTH, UNSUPPORTED_LENGTH_UNIT, PERCENT],
+  types = [LENGTH, UNSUPPORTED_LENGTH_UNIT, PERCENT, RPX],
   directions = ['Top', 'Right', 'Bottom', 'Left'],
   prefix = '',
   suffix = '',
@@ -60,16 +68,16 @@ export const parseShadow = tokenStream => {
 
     if (
       offsetX === undefined &&
-      tokenStream.matches(LENGTH, UNSUPPORTED_LENGTH_UNIT)
+      tokenStream.matches(LENGTH, UNSUPPORTED_LENGTH_UNIT, RPX)
     ) {
       offsetX = tokenStream.lastValue
       tokenStream.expect(SPACE)
-      offsetY = tokenStream.expect(LENGTH, UNSUPPORTED_LENGTH_UNIT)
+      offsetY = tokenStream.expect(LENGTH, UNSUPPORTED_LENGTH_UNIT, RPX)
 
       tokenStream.saveRewindPoint()
       if (
         tokenStream.matches(SPACE) &&
-        tokenStream.matches(LENGTH, UNSUPPORTED_LENGTH_UNIT)
+        tokenStream.matches(LENGTH, UNSUPPORTED_LENGTH_UNIT, RPX)
       ) {
         radius = tokenStream.lastValue
       } else {

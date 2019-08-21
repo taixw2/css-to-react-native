@@ -12,6 +12,7 @@ const matchString = node => {
 
 const hexColorRe = /^(#(?:[0-9a-f]{3,4}){1,2})$/i
 const cssFunctionNameRe = /^(rgba?|hsla?|hwb|lab|lch|gray|color)$/
+const rpxFunctionNameRe = /^(rpx)$/
 
 const matchColor = node => {
   if (
@@ -24,6 +25,14 @@ const matchColor = node => {
   } else if (node.type === 'function' && cssFunctionNameRe.test(node.value)) {
     return stringify(node)
   }
+  return null
+}
+
+const matchRPX = node => {
+  if (node.type === 'function' && rpxFunctionNameRe.test(node.value)) {
+    return stringify(node)
+  }
+
   return null
 }
 
@@ -69,5 +78,6 @@ export const tokens = {
   IDENT: regExpToken(identRe),
   STRING: matchString,
   COLOR: matchColor,
+  RPX: matchRPX,
   LINE: regExpToken(/^(none|underline|line-through)$/i),
 }

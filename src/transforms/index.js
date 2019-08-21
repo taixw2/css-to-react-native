@@ -19,6 +19,7 @@ const {
   UNSUPPORTED_LENGTH_UNIT,
   PERCENT,
   AUTO,
+  RPX,
 } = tokens
 
 const background = tokenStream => ({
@@ -36,7 +37,7 @@ const borderRadius = directionFactory({
 })
 const borderWidth = directionFactory({ prefix: 'border', suffix: 'Width' })
 const margin = directionFactory({
-  types: [LENGTH, UNSUPPORTED_LENGTH_UNIT, PERCENT, AUTO],
+  types: [LENGTH, UNSUPPORTED_LENGTH_UNIT, PERCENT, AUTO, RPX],
   prefix: 'margin',
 })
 const padding = directionFactory({ prefix: 'padding' })
